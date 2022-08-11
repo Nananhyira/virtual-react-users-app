@@ -7,8 +7,15 @@ function SeeAllusers(props) {
 		<Row>
 			<h1>see all the users here</h1>
 
-			{props.userInfo.map((item, index) => {
-				return <User key={index} userInfo={item} />;
+			{props.userInfo.map((item) => {
+				return (
+					<User
+						key={item.id}
+						userInfo={item}
+						DeleteUser={props.DeleteUser}
+						EditUser={props.EditUser}
+					/>
+				);
 			})}
 		</Row>
 	);
