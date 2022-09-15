@@ -6,24 +6,24 @@ import AddUserForm from "./components/AddUserForm";
 
 function App() {
 	const [users, setUsers] = useState([
-		{
-			name: "irene ak",
-			email: "irene@gmail.com",
-			gen: "45",
-			id: "8383unduhd38hdd",
-		},
-		{
-			name: "Augustine ak",
-			email: "aug@gmailcom",
-			gen: "45",
-			id: "8787bdbbubc83",
-		},
-		{ name: "Barbara", email: "bb@gmailcom", gen: "45", id: "8939u83udcc c" },
+		// 	{
+		// 		name: "irene ak",
+		// 		email: "irene@gmail.com",
+		// 		gen: "45",
+		// 		id: "8383unduhd38hdd",
+		// 	},
+		// 	{
+		// 		name: "Augustine ak",
+		// 		email: "aug@gmailcom",
+		// 		gen: "45",
+		// 		id: "8787bdbbubc83",
+		// 	},
+		// 	{ name: "Barbara", email: "bb@gmailcom", gen: "45", id: "8939u83udcc c" },
 	]);
 	const addNewUser = (user) => {
 		user.id = Math.random().toString();
 		setUsers([...users, user]);
-		console.log(user);
+		console.log(users, user);
 	};
 
 	const deleteUser = (id) => {
