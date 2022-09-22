@@ -5,3 +5,20 @@ export const reduxNewUser =(newUser) => {
   }
 
 }
+
+export const reduxDeleteUser=(id)=>{
+  return {
+    type:"DELETE_USER",
+    payload :id
+  }
+
+}
+
+ export const reduxEditUser=(updatedInfo)=>{
+  return {
+    type:"EDIT_USER",
+    payload:{updatedInfo}
+  }
+
+}
+
