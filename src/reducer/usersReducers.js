@@ -35,7 +35,7 @@ let usersReducer = (state = initialState, action) => {
 	// }
 	switch (action.type) {
 		case "ADD_NEW_USER":
-			return { ...state, users: [...state.users, action.payload] };
+			return { ...state, users: action.payload };
 
 		case "DELETE_USER":
 			const unDeletedUsers = state.users.filter(
@@ -47,8 +47,9 @@ let usersReducer = (state = initialState, action) => {
 			const updatedUserInfo = state.users.map((user) => {
 				if (user.id === action.payload.updatedInfo.id) {
 					return action.payload.updatedInfo;
-				} 
-				else {return user}
+				} else {
+					return user;
+				}
 			});
 			return { ...state, users: updatedUserInfo };
 
