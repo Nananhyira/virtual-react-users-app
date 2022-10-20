@@ -1,19 +1,20 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Card } from "react-bootstrap";
+import React, { useEffect } from "react";
+import { Container, Row, Col } from "react-bootstrap";
 import SeeAllusers from "./components/SeeAllusers";
 import AddUserForm from "./components/AddUserForm";
-import { collection, query, onSnapshot } from "firebase/firestore";
+import { collection, query, onSnapshot, orderBy } from "firebase/firestore";
 import { db } from "./firebase/Config";
 import { reduxNewUser } from "./actions/usersAtions";
 import { useDispatch } from "react-redux";
 
 function App() {
 	const dispatch = useDispatch();
+
 	useEffect(() => {
 		const readData = async () => {
-			const q = query(collection(db, "virtual-users"));
-			const unsubscribe = onSnapshot(q, (querySnapshot) => {
+			const q = query(collection(db, "v-users"), orderBy("timestamp", "asc"));
+			onSnapshot(q, (querySnapshot) => {
 				const users = [];
 				querySnapshot.forEach((doc) => {
 					users.push(doc.data());
@@ -23,7 +24,22 @@ function App() {
 			});
 		};
 		readData();
-	}, []);
+	}, [dispatch]);
+
+	// useEffect(() => {
+	// 	const readData = async () => {
+	// 		const q = query(collection(db, "virtual-users"), orderBy("name", "asc"));
+	// 		const unsubscribe = onSnapshot(q, (querySnapshot) => {
+	// 			const users = [];
+	// 			querySnapshot.forEach((doc) => {
+	// 				users.push(doc.data());
+	// 			});
+	// 			dispatch(reduxNewUser(users));
+	// 			console.log(users);
+	// 		});
+	// 	};
+	// 	readData();
+	// }, []);
 
 	// const [users, setUsers] = useState([
 	// 	{

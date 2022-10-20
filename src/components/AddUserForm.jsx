@@ -1,17 +1,17 @@
 import React from "react";
 import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
-import { reduxNewUser } from "../actions/usersAtions";
-import { connect, useDispatch } from "react-redux";
+// import { reduxNewUser } from "../actions/usersAtions";
+// import { useDispatch } from "react-redux";
 import { v4 as uuid } from "uuid";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { db } from "../firebase/Config";
 
 function AddUserForm(props) {
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [gen, setGen] = useState("");
-	const dispatch = useDispatch();
+	// const dispatch = useDispatch();
 	const handleChange = (e) => {
 		setGen(e.target.value);
 		console.log(gen);
@@ -21,10 +21,16 @@ function AddUserForm(props) {
 		// props.newUser({ name, email, gen });
 		// props.reduxNewUser({ name, email, gen });
 		// dispatch(reduxNewUser({ id: uuid(), name, email, gen }));
-		let newUser = { id: uuid(), name, email, gen };
+		let newUser = {
+			id: uuid(),
+			name,
+			email,
+			gen,
+			timestamp: serverTimestamp(),
+		};
 		console.log({ id: uuid(), name, email, gen });
 		try {
-			await setDoc(doc(db, "virtual-users", newUser.id), newUser);
+			await setDoc(doc(db, "v-users", newUser.id), newUser);
 		} catch (e) {
 			console.log(e);
 		}

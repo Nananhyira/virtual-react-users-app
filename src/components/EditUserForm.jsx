@@ -3,6 +3,8 @@ import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import { reduxEditUser } from "../actions/usersAtions.js";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../firebase/Config";
 
 function EditUserForm(props) {
 	const [name, setName] = useState(props.userInfo.name);
@@ -12,13 +14,15 @@ function EditUserForm(props) {
 		setGen(e.target.value);
 		// console.log(gen);
 	};
-	const handleEditSubmit = (e) => {
+	const handleEditSubmit = async (e) => {
 		e.preventDefault();
-
 		let newInfo = { id: props.userInfo.id, email, name, gen };
 
-		props.reduxEditUser(newInfo);
+		const editingUser = doc(db, "v-users", props.userInfo.id);
+		// Set the "capital" field of the city 'DC'
+		await updateDoc(editingUser, newInfo);
 
+		// props.reduxEditUser(newInfo);
 		// props.EditUser(props.userInfo.id, { email, name, gen });
 		setName("");
 		setEmail("");

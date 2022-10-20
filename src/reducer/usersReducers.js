@@ -1,30 +1,30 @@
 import { v4 as uuid } from "uuid";
 let initialState = {
 	users: [
-		{
-			name: "irene ak",
-			email: "irene@gmail.com",
-			gen: "45",
-			id: uuid(),
-		},
-		{
-			name: "Augustine ak",
-			email: "aug@gmailcom",
-			gen: "45",
-			id: uuid(),
-		},
-		{
-			name: "new user",
-			email: "aug@gmailcom",
-			gen: "45",
-			id: uuid(),
-		},
-		{
-			name: "beatrice",
-			email: "beautrice@gmailcom",
-			gen: "45",
-			id: uuid(),
-		},
+		// {
+		// 	name: "irene ak",
+		// 	email: "irene@gmail.com",
+		// 	gen: "45",
+		// 	id: uuid(),
+		// },
+		// {
+		// 	name: "Augustine ak",
+		// 	email: "aug@gmailcom",
+		// 	gen: "45",
+		// 	id: uuid(),
+		// },
+		// {
+		// 	name: "new user",
+		// 	email: "aug@gmailcom",
+		// 	gen: "45",
+		// 	id: uuid(),
+		// },
+		// {
+		// 	name: "beatrice",
+		// 	email: "beautrice@gmailcom",
+		// 	gen: "45",
+		// 	id: uuid(),
+		// },
 	],
 };
 
