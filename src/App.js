@@ -1,12 +1,16 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import React, { useEffect } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import React, {  useEffect } from "react";
+import { Container, Row, Col, } from "react-bootstrap";
 import SeeAllusers from "./components/SeeAllusers";
 import AddUserForm from "./components/AddUserForm";
 import { collection, query, onSnapshot, orderBy } from "firebase/firestore";
-import { db } from "./firebase/Config";
+import { db, auth } from "./firebase/Config";
 import { reduxNewUser } from "./actions/usersAtions";
 import { useDispatch } from "react-redux";
+import Routing from "./Routing"
+import {lOGinUser} from "./actions/authAction"
+import { onAuthStateChanged } from "firebase/auth";
+import {connect } from "react-redux"
 
 function App() {
 	const dispatch = useDispatch();
@@ -25,6 +29,24 @@ function App() {
 		};
 		readData();
 	}, [dispatch]);
+
+
+
+	useEffect (()=>{
+		onAuthStateChanged(auth, (user)=>{
+			if (user)dispatch(lOGinUser(user));
+			else {dispatch(lOGinUser(null));}
+
+			//this is for connect 
+			// if(user)props.lOGinUser(user)
+			// else props.lOGinUser(null)
+
+
+
+		})
+
+
+	},[])
 
 	// useEffect(() => {
 	// 	const readData = async () => {
@@ -84,7 +106,9 @@ function App() {
 
 	return (
 		<Container>
-			<Row style={{ marginTop: "20px" }}>
+
+			<Routing/>
+			{/* <Row style={{ marginTop: "20px" }}>
 				<Col md={4}>
 					<AddUserForm
 					// newUser={addNewUser}
@@ -97,9 +121,13 @@ function App() {
 					// EditUser={EditUser}
 					/>
 				</Col>
-			</Row>
+			</Row> */}
 		</Container>
 	);
 }
+const mapDispatchToProps ={
+lOGinUser:lOGinUser
 
-export default App;
+}
+
+export default connect(null, mapDispatchToProps)(App);

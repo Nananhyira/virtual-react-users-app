@@ -1,11 +1,11 @@
 import React from "react";
 import User from "./User";
-import { Row, } from "react-bootstrap";
-import {  useSelector } from "react-redux";
+import { Row } from "react-bootstrap";
+import { useSelector } from "react-redux";
 
 function SeeAllusers(props) {
-	const { users } = useSelector((state) => {
-		return state;
+	const users = useSelector((state) => {
+		return state.usersReducer.users;
 	});
 	return (
 		<Row>
